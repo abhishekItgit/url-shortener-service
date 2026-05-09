@@ -1,8 +1,11 @@
 package com.walk_era.url_shortener_service.util;
 
-public class SnowFlakeIDGeneratorUtil {
+import org.springframework.stereotype.Component;
+
+@Component
+public class SnowFlakeIDGenerator {
     private long sequence =0;
-    private long  lastTimeStamp;
+    private long  lastTimeStamp =-1;
 
     public synchronized long nextId(long machineID){
         long currentTimestamp  = System.currentTimeMillis();

@@ -4,7 +4,7 @@ public class Base62Util {
 
     private static final String BASE62 =  "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
-    public  String getBase62(Long value){
+    public static String getBase62(Long value){
         StringBuilder sb = new StringBuilder();
         while(value>0){
             int mod = (int)(value % 62);

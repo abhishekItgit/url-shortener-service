@@ -1,7 +1,6 @@
 package com.walk_era.url_shortener_service.dto;
 
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
