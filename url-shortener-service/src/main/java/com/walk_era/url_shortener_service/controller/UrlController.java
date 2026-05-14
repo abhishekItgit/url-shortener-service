@@ -1,7 +1,9 @@
 package com.walk_era.url_shortener_service.controller;
 
+import com.walk_era.url_shortener_service.dto.ShortUrlResponse;
 import com.walk_era.url_shortener_service.dto.UrlRequest;
-import com.walk_era.url_shortener_service.dto.UrlResponse;
+
+import com.walk_era.url_shortener_service.service.IUrlService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,22 +14,27 @@ import java.net.URI;
 @RequestMapping("api/v1/url")
 public class UrlController {
 
+    private final IUrlService iUrlService;
+
+    public UrlController(IUrlService iUrlService) {
+        this.iUrlService = iUrlService;
+    }
+
     @PostMapping("/shorten")
-    public ResponseEntity<UrlResponse> urlShorten(@RequestBody UrlRequest urlRequest){
-        UrlResponse urlResponse = new UrlResponse();
-       return  ResponseEntity.ok(urlResponse);
+    public ResponseEntity<ShortUrlResponse> urlShorten(@RequestBody UrlRequest urlRequest) {
+        ShortUrlResponse urlResponse = iUrlService.shorten(urlRequest);
+        return ResponseEntity.ok(urlResponse);
     }
 
     @GetMapping("/{shortId}")
-    public ResponseEntity<Void> redirect(@PathVariable String shortId){
+    public ResponseEntity<Void> redirect(@PathVariable String shortId) {
 
-        String longUrl = "";
-     return   ResponseEntity.status(HttpStatus.FOUND)
+        String longUrl = iUrlService.redirect(shortId);
+        return ResponseEntity.status(HttpStatus.FOUND)
                 .location(URI.create(longUrl))
                 .build();
 
     }
-
 
 
 }

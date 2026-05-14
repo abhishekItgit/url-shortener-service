@@ -5,9 +5,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface IUrlShortenerRepo extends JpaRepository<UrlShortner,Long> {
+public interface IUrlShortenerRepo extends JpaRepository<UrlShortner, Long> {
 
-    Optional<UrlShortner> findByShortUrl(String ShortUrl);
-    boolean existsByShortUrl(String ShortUrl);
+    Optional<UrlShortner> findByShortCode(String ShortCode);
+
+    boolean existsByShortCode(String ShortCode);
 
 }
